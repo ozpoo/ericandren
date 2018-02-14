@@ -604,10 +604,10 @@ function styles() {
   //   array(), '1.0', 'all');
   // wp_enqueue_style('Now Alt');
 
-  // wp_register_style('Sofia Pro',
-  //   get_template_directory_uri() . '/assets/font/Sofia Pro/style.css?v='.time(),
-  //   array(), '1.0', 'all');
-  // wp_enqueue_style('Sofia Pro');
+  wp_register_style('Sofia Pro',
+    get_template_directory_uri() . '/assets/font/Sofia Pro/style.css?v='.time(),
+    array(), '1.0', 'all');
+  wp_enqueue_style('Sofia Pro');
 
   wp_register_style('Sailec',
     get_template_directory_uri() . '/assets/font/Sailec/stylesheet.css?v='.time(),
