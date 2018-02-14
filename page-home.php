@@ -88,11 +88,16 @@
 			var pnoise, globalParams;
 
 			$(window).load(function(){
+				size();
 				init();
 				animate();
 				setTimeout(function(){
 					$(".threejs").addClass("show");
 				}, 880)
+			});
+
+			$(window).resize(function(){
+				size();
 			});
 
 			function init() {
@@ -302,6 +307,10 @@
 					scale = 1.45;
 				}
 				plane.scale.x = plane.scale.y = scale;
+			}
+
+			function size() {
+				$(".threejs").height($(window).height());
 			}
 
 			function supportsVideoType(type) {
