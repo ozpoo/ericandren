@@ -26,14 +26,13 @@
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		font-size: calc(20px + 7vw);
+		font-size: calc(20px + 6vw);
 		transform: translate3d(-50%, -50%, 0);
 		z-index: 2;
 		width: 100%;
 		text-align: center;
 		pointer-events: none;
-		font-weight: 600;
-		font-family: 'BlackRock Free';
+		font-weight: 700;
 	}
 	.threejs {
 		position: fixed;
