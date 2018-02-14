@@ -111,8 +111,10 @@
 
 				if(supportsVideoType('webm') === "probably") {
 				  video.src = "<?php echo get_template_directory_uri(); ?>/assets/video/me.webm";
+					console.log("webm");
 				} else {
 				  video.src = "<?php echo get_template_directory_uri(); ?>/assets/video/me.mp4";
+					console.log("mp4");
 				}
 
 				video.play();
