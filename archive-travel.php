@@ -333,7 +333,7 @@
 	}
 
 	</style>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBloBEVpchbc6AquIFEQHSDhLy6QlsNlKQ"></script>
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBloBEVpchbc6AquIFEQHSDhLy6QlsNlKQ"></script> -->
 	<script type="text/javascript">
 	(function($) {
 
