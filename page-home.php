@@ -86,17 +86,15 @@
 			var renderPass, copyPass;
 			var pnoise, globalParams;
 
-			$(window).load(function(){
-				size();
+			$(document).ready(function() {
 				init();
 				animate();
+			});
+
+			$(window).load(function() {
 				setTimeout(function(){
 					$(".threejs").addClass("show");
 				}, 880)
-			});
-
-			$(window).resize(function(){
-				size();
 			});
 
 			function init() {
@@ -297,9 +295,10 @@
 			}
 
 			function onResize() {
+				$(".threejs").height($(window).height());
 				setScale();
-				renderer.setSize(window.innerWidth, window.innerHeight);
-				camera.aspect = window.innerWidth / window.innerHeight;
+				renderer.setSize($(window).width(), $(window).height());
+				camera.aspect = $(window).width() / $(window).height();
 				camera.updateProjectionMatrix();
 			}
 
@@ -309,10 +308,6 @@
 					scale = 1.45;
 				}
 				plane.scale.x = plane.scale.y = scale;
-			}
-
-			function size() {
-				$(".threejs").height($(window).height());
 			}
 
 			function supportsVideoType(type) {
