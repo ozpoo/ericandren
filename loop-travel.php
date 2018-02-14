@@ -4,18 +4,14 @@
 
 		<article class="list-item" ]>
 		<?php $categories = wp_get_post_terms($post->ID, 'travel_category', array("fields" => "names")); ?>
-			<span class="thumbnail">
-				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?>" data-category="<?php echo $categories[0]; ?>" data-src-thumb="<?php echo wp_get_attachment_image_src( $thumb, 'small' )[0]; ?>">
-					<?php the_post_thumbnail("small-ratio"); ?>
-				</a>
-			</span>
-			<span class="title"><a href="<?php the_permalink(); ?>" data-category="<?php echo $categories[0]; ?>"><strong><?php the_title(); ?></strong></a></span>
-			<span class="excerpt"><?php the_excerpt(); ?></span>
 			<span class="map">
 				<div class="acf-map">
-					<div class="marker" data-lat="<?php get_field("latitude"); ?>" data-lng="<?php get_field("longitude"); ?>"></div>
+					<div class="marker" data-lat="<?php echo get_field("latitude"); ?>" data-lng="<?php echo get_field("longitude"); ?>">
+						<span class="excerpt"><?php the_excerpt(); ?></span>
+					</div>
 				</div>
 			</span>
+			<span class="title"><a href="<?php the_permalink(); ?>" data-category="<?php echo $categories[0]; ?>"><strong><?php the_title(); ?></strong></a></span>
 			<ul class="cat">
 			 <?php $posttags = get_the_tags(); ?>
 					<?php if ( ! empty( $categories ) ) { ?>

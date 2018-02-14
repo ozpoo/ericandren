@@ -881,6 +881,9 @@ strong {
     &:first-child {
       width: 50%;
 
+    	.acf-map {
+    		height: 400px;
+    	}
 
       .title {
         display: none;
@@ -896,6 +899,17 @@ strong {
         display: none;
         margin-left: 50%;
       }
+    }
+
+    .acf-map {
+      width: 100%;
+      height: 200px;
+      border: #ccc solid 1px;
+    }
+
+    /* fixes potential theme css conflict */
+    .acf-map img {
+       max-width: inherit !important;
     }
 
     span {
