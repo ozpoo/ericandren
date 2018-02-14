@@ -74,7 +74,8 @@ $white: #fcfaf7;
 $black: #222222;
 $blue: #5000ff;
 $grey: rgb(244,243,242);
-$font-regular: 'Sofia Pro';
+$font-regular: 'Sailec', Sans-Serif;
+$font-secondary: 'Space Mono', monospace;
 $unit-1: calc(6px + .4vw);
 $unit-2: calc(12px + .8vw);
 $unit-3: calc(18px + 1.2vw);
@@ -158,7 +159,7 @@ button {
 
 small {
   display: inline-block;
-  font-family: 'Space Mono';
+  font-family: $font-secondary;
   font-size: .7em;
   letter-spacing: .08em;
 }
