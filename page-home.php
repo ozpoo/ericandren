@@ -116,6 +116,7 @@
 					console.log("mp4");
 				}
 
+				video.load();
 				video.play();
 
 				//Use webcam

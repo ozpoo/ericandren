@@ -590,7 +590,7 @@ function conditional_scripts(){
 
 function styles() {
   wp_register_style('Space Mono',
-    get_template_directory_uri() . '/assets/font/Space Mono Web/stylesheet.css?v='.time(),
+    get_template_directory_uri() . '/assets/font/Space Mono/stylesheet.css?v='.time(),
     array(), '1.0', 'all');
   wp_enqueue_style('Space Mono');
 
