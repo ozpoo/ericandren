@@ -26,7 +26,7 @@
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		font-size: calc(22px + 4.6vw);
+		font-size: calc(26px + 4.4vw);
 		transform: translate3d(-50%, -50%, 0);
 		z-index: 2;
 		width: 100%;
