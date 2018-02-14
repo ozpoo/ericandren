@@ -1,3 +1,4 @@
+<?php $count = 1; ?>
 <?php if (have_posts()): ?>
 	<?php while (have_posts()) : the_post(); ?>
 		<?php $thumb = get_post_thumbnail_id(); ?>
@@ -5,8 +6,17 @@
 		<article class="list-item" ]>
 		<?php $categories = wp_get_post_terms($post->ID, 'work_category', array("fields" => "names")); ?>
 			<span class="thumbnail">
-				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?>" data-category="<?php echo $categories[0]; ?>" data-src-thumb="<?php echo wp_get_attachment_image_src( $thumb, 'small' )[0]; ?>">
-					<?php the_post_thumbnail("small-ratio"); ?>
+				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?>" data-category="<?php echo $categories[0]; ?>">
+					<?php $thumb = get_post_thumbnail_id(); ?>
+					<picture>
+						<?php if($count++ == 1): ?>
+							<source media="(max-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>">
+							<img src="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>">
+						<?php else: ?>
+							<source media="(max-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>">
+							<img src="<?php echo wp_get_attachment_image_src( $thumb, 'micro-ratio' )[0]; ?>">
+						<?php endif; ?>
+					</picture>
 				</a>
 			</span>
 			<span class="title"><a href="<?php the_permalink(); ?>" data-category="<?php echo $categories[0]; ?>"><strong><?php the_title(); ?></strong></a></span>
