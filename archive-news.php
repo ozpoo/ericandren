@@ -5,10 +5,10 @@
 		<section class="filter">
 			<ul>
 				<li><button data-category="all"><small>All</small></button></li>
-				<?php $terms = get_terms(['taxonomy' => 'news_category']); ?>
+				<!-- <?php $terms = get_terms(['taxonomy' => 'news_category']); ?>
 				<?php foreach($terms as $term): ?>
 					<li><button data-category="<?php echo $term->name; ?>"><small><?php echo $term->name; ?></small></button></li>
-				<?php endforeach; ?>
+				<?php endforeach; ?> -->
 			</ul>
 		</section>
 

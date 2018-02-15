@@ -5,14 +5,15 @@
 		'use strict';
 
 		$(document).ready(function(){
-
 			document.addEventListener("touchstart", function(){}, true);
-			$("body").addClass("show");
-
+			$(".menu-toggle").on("click", function (){
+				$(".menu-modal").toggleClass("show");
+			});
 		});
 
-		$(".menu-toggle").on("click", function (){
-			$(".menu-modal").toggleClass("show");
+		$(window).load(function(){
+			$("body").addClass("show");
+			$(".name, .menu-toggle, .filter").addClass("show");
 		});
 
 		var jsonData = function( form ) {

@@ -5,10 +5,10 @@
 		<section class="filter">
 			<ul>
 				<li><button class="filter-button" data-category="All"><small>All</small></button></li>
-				<?php $terms = get_terms(['taxonomy' => 'work_category']); ?>
+				<!-- <?php $terms = get_terms(['taxonomy' => 'work_category']); ?>
 				<?php foreach($terms as $term): ?>
 					<li><button class="filter-button" data-category="<?php echo $term->name; ?>"><small><?php echo $term->name; ?></small></button></li>
-				<?php endforeach; ?>
+				<?php endforeach; ?> -->
 			</ul>
 		</section>
 
@@ -59,6 +59,10 @@
 								filterItems(term);
 								showItems();
 							}, transitionTime, $(this));
+							transitionTime = transitionCount * transitionSplit + transitionBuffer;
+							setTimeout(function(){
+								$(".name, .menu-toggle").addClass("show");
+							}, 880);
 						});
 
 						$(".list-item").each(function() {
