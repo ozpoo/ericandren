@@ -25,6 +25,7 @@
 
 					var transitionSplit, transitionTime, transitionCount, transitionBuffer;
 					var cache = [];
+					var lastX, lastY, offsetLeft, offsetTop;
 
 					$(window).load(function(){
 						init();
@@ -32,6 +33,16 @@
 					});
 
 					var init = function() {
+						$("body").mousemove(onMouseMove);
+
+						$(document).on('mouseenter', '.thumbnail', function () {
+							$(this).addClass('hover');
+						});
+
+						$(document).on('mouseleave', '.thumbnail', function () {
+							$(this).removeClass('hover');
+						});
+
 						$(".filter button").each(function() {
 							var button = $(this);
 							var category = $(this).attr("data-category");
@@ -86,8 +97,8 @@
 					var showItems = function() {
 						$(document).scrollTop(0);
 						transitionCount = $(".list-item:visible").size();
-						transitionSplit = 24;
-						transitionBuffer = 880;
+						transitionSplit = 40;
+						transitionBuffer = 1000;
 						transitionTime = transitionCount * transitionSplit + transitionBuffer;
 						var i = 0;
 						$(".list-item").each(function() {
@@ -107,6 +118,62 @@
 			      }, term);
 					}
 
+					var animate = function(time) {
+						requestAnimationFrame( animate );
+						var x = lastX - ($(window).width()/2);
+						var y = lastY - ($(window).height()/2);
+
+						if($(".thumbnail.hover").size()) {
+							var $thumb = $(".thumbnail.hover");
+							var offset = $($thumb).offset();
+							var width = $($thumb).width();
+							var height = $($thumb).height();
+							var centerX = offset.left + width / 2 - ($(window).width()/2);
+							var centerY = offset.top + height / 2 - ($(window).height()/2);
+
+							var deltaX = centerX - x;
+							var deltaY = centerY - y;
+
+							if($($thumb).closest(".list-item").is(":first-child") && $(window).width() > 1120) {
+								deltaX = -deltaX*.02;
+								deltaY = deltaY*.04;
+							} else {
+								deltaX = -deltaX*.05;
+								deltaY = deltaY*.1;
+							}
+
+							$($thumb).css("transform", "rotateX("+deltaY+"deg) rotateY("+deltaX+"deg) translateZ(30px)");
+						} else {
+							$(".thumbnail").css("transform", "none");
+						}
+					}
+
+					var getCursorPosition = function(e) {
+		        if(offsetLeft == undefined) {
+	            offsetLeft = 0;
+	            for(var node=$("body")[0]; node; node = node.offsetParent) {
+	              offsetLeft += node.offsetLeft;
+	            }
+		        }
+		        if(offsetTop == undefined) {
+	            offsetTop = 0;
+	            for(var node=$("body")[0]; node; node = node.offsetParent) {
+	              offsetTop += node.offsetTop;
+	            }
+		        }
+
+		        var x = e.pageX - offsetLeft;
+		        var y = e.pageY - offsetTop;
+
+		        return { x: x, y: y };
+			    }
+
+					var onMouseMove = function(e) {
+		        var pos = getCursorPosition(e);
+		        lastX = pos.x;
+		        lastY = pos.y;
+			    }
+
 					var requestAnimationFrame = (function() {
 					 return  window.requestAnimationFrame       ||
 									 window.webkitRequestAnimationFrame ||
@@ -117,10 +184,6 @@
 											 window.setTimeout(callback, 1000 / 60);
 									 };
 					 })();
-
-					var animate = function(time) {
-						requestAnimationFrame( animate );
-					}
 
 				});
 

@@ -5,7 +5,7 @@
 
 		<article class="list-item" ]>
 		<?php $categories = wp_get_post_terms($post->ID, 'work_category', array("fields" => "names")); ?>
-			<span class="thumbnail">
+			<div class="thumbnail">
 				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?>" data-category="<?php echo $categories[0]; ?>">
 					<?php $thumb = get_post_thumbnail_id(); ?>
 					<picture>
@@ -18,9 +18,9 @@
 						<?php endif; ?>
 					</picture>
 				</a>
-			</span>
-			<span class="title"><a href="<?php the_permalink(); ?>" data-category="<?php echo $categories[0]; ?>"><strong><?php the_title(); ?></strong></a></span>
-			<span class="excerpt"><?php the_excerpt(); ?></span>
+			</div>
+			<div class="title"><a href="<?php the_permalink(); ?>" data-category="<?php echo $categories[0]; ?>"><strong><?php the_title(); ?></strong></a></div>
+			<div class="excerpt"><?php the_excerpt(); ?></div>
 			<ul class="cat">
 			 <?php $posttags = get_the_tags(); ?>
 					<?php if ( ! empty( $categories ) ) { ?>

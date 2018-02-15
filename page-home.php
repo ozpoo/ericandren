@@ -1,6 +1,9 @@
 <?php get_header(); ?>
 
 <style>
+	header {
+		display: none;
+	}
 	html {
 		background: #161616;
 	}
