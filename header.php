@@ -13,14 +13,7 @@
 		<meta name="description" content="<?php bloginfo('description'); ?>">
 
 		<?php wp_head(); ?>
-		<script>
-      // conditionizr.com
-      // configure environment tests
-      conditionizr.config({
-        assets: '<?php echo get_template_directory_uri(); ?>',
-        tests: {}
-      });
-    </script>
+
 		<script>
 				document.createElement( "picture" );
 		</script>
@@ -29,13 +22,6 @@
 	<body <?php body_class(); ?>>
 
 		<header class="header">
-			<!-- <div class="name">
-				<p>
-						<a href="<?php echo get_home_url(); ?>">
-							Eric Andren &mdash; MFA
-						</a>
-				</p>
-			</div> -->
 			<div class="menu-toggle">
 				<ul>
 					<li>

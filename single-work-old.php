@@ -20,6 +20,14 @@
 
 			<div class="top-space">
 				<?php $thumb = get_post_thumbnail_id(); ?>
+				<div class="bg" data-url="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
+					<figure>
+						<picture>
+							<source media="(max-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
+								<img src="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
+						</picture>
+					</figure>
+				</div>
 				<div class="description">
 					<div class="scroll-fade">
 						<p><?php the_excerpt(); ?></p>
@@ -28,6 +36,16 @@
 			</div>
 
 			<div class="stream">
+
+				<div class="poster" data-url="<?php echo wp_get_attachment_image_src( $thumb, 'micro' )[0]; ?>">
+					<figure>
+						<picture>
+							<source media="(max-width: 1800px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'small' )[0]; ?>">
+								<img src="<?php echo wp_get_attachment_image_src( $thumb, 'medium' )[0]; ?>">
+						</picture>
+					</figure>
+				</div>
+
 				<?php the_content(); ?>
 			</div>
 
@@ -53,9 +71,11 @@
 			?>
 			<div class="pagination">
 				<div class="next">
+					<!-- <p><?php next_post_link(); ?></p> -->
 					<p><a href="<?php echo $prevPost; ?>">previous post</i></a></p>
 				</div>
 				<div class="previous">
+					<!-- <p><?php previous_post_link(); ?></p> -->
 					<p><a href="<?php echo $nextPost; ?>">next post</a></p>
 				</div>
 			</div>
@@ -67,20 +87,39 @@
 		<script>
 
 			(function ($, root, undefined) {
+
 				$(function () {
 
 					var loaded = false;
 					var scrollTop;
 
 					$(document).ready(function() {
-						init();
+						setTimeout(function(){
+							$("html, body").scrollTop(0);
+						}, 100);
 					});
 
 					$(window).load(function() {
+						init();
 						animate();
 					});
 
 					function init() {
+						$("body").addClass("show");
+
+						// glitcher.glitch($(".poster").data("url"), function () {
+						// 		$(".poster figure").append(glitcher.canvas);
+						// });
+						// glitcher.glitch($(".bg").data("url"), function () {
+						// 	$(".bg figure").append(glitcher.canvas);
+						// });
+
+						$(".return a").on("click", function (ev) {
+							ev.preventDefault();
+							$("body").removeClass("show");
+							window.location.href = $(this).attr("href");
+						});
+
 						$(".explore button").on("click", function (ev) {
 							$("html, body").animate({ scrollTop: $(window).height()*.25 }, 660);
 						});
@@ -93,6 +132,7 @@
 								setTimeout(function(){
 									$(".description").addClass("show");
 									setTimeout(function(){
+										$("html, body").animate({ scrollTop: $(window).height()*.25 }, 660);
 										loaded = true;
 									}, 660);
 								}, 660);
@@ -122,11 +162,44 @@
 							scroll();
 						}
 
+						// glitch();
+
 					}
 
 					function scroll() {
 						deltaY = scrollTop * .4;
 						$(".description").css( "transform", "translate3d(0, "+deltaY+"px, 0)" );
+						// $(".poster").css({"transform": "translate3d(0, "+deltaY+"px, 0)", "opacity": deltaO });
+
+						// deltaO = (scrollTop * .0014);
+						// $(".poster").css( "opacity", deltaO );
+						// $("img").each(function(){
+						// 	deltaY = scrollTop * $(this).data("delta");
+						// 	$(this).css("transform","translate3d(0, "+deltaY+"px, 0)");
+						// });
+					}
+
+					function glitch() {
+						if(delta++ == 3) {
+							glitcher.options = {
+									color: {
+											red: 1,
+											green: 0.8,
+											blue: 0.58
+									},
+									stereoscopic: {
+											red: 10 * randomRange(1, 3),
+											green: 5 * randomRange(1, 3),
+											blue: 30 * randomRange(1, 3)
+									},
+									lineOffset: {
+											value: 5 * randomRange(1, 3),
+											lineHeight: 10 * randomRange(1, 3)
+									}
+							};
+							glitcher.process();
+							delta = 0;
+						}
 					}
 
 					(function() {
@@ -156,6 +229,7 @@
 					}());
 
 				});
+
 			})(jQuery, this);
 
 		</script>
