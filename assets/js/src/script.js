@@ -54,12 +54,11 @@
 
 		var initVideos = function() {
 			$allVideos = $("iframe[src*='youtube.com']");
-			console.log($allVideos);
 			$allVideos.each(function() {
 				var url = $(this).attr("src");
         $(this).attr("src",url+"&amp;wmode=transparent");
 			  $(this)
-			    .data('aspectRatio', this.height / this.width)
+			    .attr('data-aspectRatio', this.height / this.width)
 			    .removeAttr('height')
 			    .removeAttr('width');
 			});
@@ -68,10 +67,10 @@
 		var setVideos = function() {
 			$allVideos.each(function() {
 		    var $el = $(this);
-				var newWidth = $el.parent().width();
+				var newWidth = $el.parent().innerWidth();
 		    $el
 		      .width(newWidth)
-		      .height(newWidth * $el.data('aspectRatio'));
+		      .height(newWidth * $el.attr('data-aspectRatio'));
 		  });
 		};
 

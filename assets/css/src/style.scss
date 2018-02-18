@@ -821,11 +821,12 @@ strong {
 
   .stream {
     position: relative;
+    margin: 0 20vw;
     z-index: 10;
 
     figure {
-      width: 100vw;
-      padding: $unit-4 20vw;
+      width: 100%;
+      padding: $unit-4 0;
 
       img, video {
         width: 100%;
