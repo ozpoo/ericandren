@@ -10,11 +10,15 @@
 					<?php $thumb = get_post_thumbnail_id(); ?>
 					<picture>
 						<?php if($count++ == 1): ?>
-							<source media="(max-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>">
-							<img src="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>">
+							<img
+							class="lazy"
+							data-src="<?php echo wp_get_attachment_image_src( $thumb, 'medium-ratio' )[0]; ?>"
+							src="<?php echo wp_get_attachment_image_src( $thumb, 'micro-ratio' )[0]; ?>">
 						<?php else: ?>
-							<source media="(max-width: 600px)" srcset="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>">
-							<img src="<?php echo wp_get_attachment_image_src( $thumb, 'micro-ratio' )[0]; ?>">
+							<img
+							class="lazy"
+							data-src="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>"
+							src="<?php echo wp_get_attachment_image_src( $thumb, 'micro-ratio' )[0]; ?>">
 						<?php endif; ?>
 					</picture>
 				</a>

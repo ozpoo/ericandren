@@ -5,17 +5,16 @@
 
 if (function_exists('add_theme_support')) {
     add_theme_support('menus');
-
     add_theme_support('post-thumbnails');
+
     add_image_size('x-large', 2400, '', true);
-    add_image_size('large', 1200, '', true);
+    add_image_size('large', 1600, '', true);
     add_image_size('medium', 800, '', true);
-    add_image_size('small', 600, '', true);
-    add_image_size('small-ratio', 600, 400, true);
-    add_image_size('micro', 300, '', true);
-    add_image_size('micro-ratio', 300, 200, true);
-    add_image_size('tile', 512, 512, true);
-    add_image_size('holder', 2, '', true);
+    add_image_size('medium-ratio', 800, 533, true);
+    add_image_size('small', 400, '', true);
+    add_image_size('small-ratio', 400, 267, true);
+    add_image_size('micro', 6, '', true);
+    add_image_size('micro-ratio', 6, 4, true);
 
     add_theme_support('automatic-feed-links');
     load_theme_textdomain('oz', get_template_directory() . '/languages');

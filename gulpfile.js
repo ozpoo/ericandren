@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const uglify = require("gulp-uglify");
 const jshint = require("gulp-jshint");
+const stylish = require('jshint-stylish');
 const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
 const minifyCss = require("gulp-minify-css");
@@ -12,7 +13,7 @@ const concat = require("gulp-concat");
 gulp.task('js', function () {
 	gulp.src('assets/js/src/script.js')
 	.pipe(jshint())
-	.pipe(jshint.reporter('fail'))
+	.pipe(jshint.reporter('jshint-stylish'))
 	.pipe(concat('build.js'))
 	.pipe(uglify())
 	.pipe(gulp.dest('assets/js/build'));

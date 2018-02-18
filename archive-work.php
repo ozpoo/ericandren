@@ -142,7 +142,7 @@
 								deltaY = deltaY*.1;
 							}
 
-							$($thumb).css("transform", "rotateX("+deltaY+"deg) rotateY("+deltaX+"deg) translateZ(30px)");
+							// $($thumb).css("transform", "rotateX("+deltaY+"deg) rotateY("+deltaX+"deg) translateZ(30px)");
 						} else {
 							$(".thumbnail").css("transform", "none");
 						}
