@@ -11,14 +11,18 @@
 					<picture>
 						<?php if($count++ == 1): ?>
 							<img
-							class="lazy"
-							data-src="<?php echo wp_get_attachment_image_src( $thumb, 'medium-ratio' )[0]; ?>"
-							src="<?php echo wp_get_attachment_image_src( $thumb, 'micro-ratio' )[0]; ?>">
+								alt=""
+								src="<?php echo wp_get_attachment_image_src($thumb, 'micro-ratio')[0]; ?>"
+								sizes="auto"
+								data-srcset="<?php echo wp_get_attachment_image_srcset($thumb, 'medium'); ?>"
+								class="lazyload blur-up" />
 						<?php else: ?>
 							<img
-							class="lazy"
-							data-src="<?php echo wp_get_attachment_image_src( $thumb, 'small-ratio' )[0]; ?>"
-							src="<?php echo wp_get_attachment_image_src( $thumb, 'micro-ratio' )[0]; ?>">
+								alt=""
+								src="<?php echo wp_get_attachment_image_src($thumb, 'micro-ratio')[0]; ?>"
+								sizes="auto"
+								data-srcset="<?php echo wp_get_attachment_image_srcset($thumb, 'small'); ?>"
+								class="lazyload blur-up" />
 						<?php endif; ?>
 					</picture>
 				</a>

@@ -7,14 +7,28 @@ if (function_exists('add_theme_support')) {
     add_theme_support('menus');
     add_theme_support('post-thumbnails');
 
-    add_image_size('x-large', 2400, '', true);
-    add_image_size('large', 1600, '', true);
+    add_theme_support('post-thumbnails');
+    add_image_size('12',   2880, '', true);
+    add_image_size('11',   2560, '', true);
+    add_image_size('10',   1920, '', true);
+    add_image_size('09',   1440, '', true);
+    add_image_size('08',   1366, '', true);
+    add_image_size('07',   1280, '', true);
+    add_image_size('06',   1024, '', true);
+    add_image_size('05',   960, '', true);
+    add_image_size('04',   800, '', true);
+    add_image_size('03',   640, '', true);
+    add_image_size('02',   480, '', true);
+    add_image_size('01',   10, '', true);
+
+    add_image_size('x-large', 1920, '', true);
+    add_image_size('large', 1440, '', true);
     add_image_size('medium', 800, '', true);
     add_image_size('medium-ratio', 800, 533, true);
-    add_image_size('small', 400, '', true);
-    add_image_size('small-ratio', 400, 267, true);
-    add_image_size('micro', 6, '', true);
-    add_image_size('micro-ratio', 6, 4, true);
+    add_image_size('small', 480, '', true);
+    add_image_size('small-ratio', 480, 320, true);
+    add_image_size('micro', 24, '', true);
+    add_image_size('micro-ratio', 24, 16, true);
 
     add_theme_support('automatic-feed-links');
     load_theme_textdomain('oz', get_template_directory() . '/languages');
@@ -26,6 +40,16 @@ function header_scripts() {
           get_template_directory_uri() . '/assets/font/Font Awesome/svg-with-js/js/fontawesome-all.min.js',
           array('jquery'), '1.0.0');
         wp_enqueue_script('fontawesome');
+
+        wp_register_script('lazysizes',
+          get_template_directory_uri() . '/assets/js/_lib/lazysizes/lazysizes.min.js',
+          array(), '1.0.0');
+        wp_enqueue_script('lazysizes');
+
+        wp_register_script('flickity',
+          get_template_directory_uri() . '/assets/js/_lib/flickity/flickity.pkgd.min.js',
+          array(), '1.0.0');
+        wp_enqueue_script('flickity');
 
         wp_register_script('js-cookie',
           get_template_directory_uri() . '/assets/js/_lib/js-cookie/js.cookie.js',
@@ -854,9 +878,9 @@ function wp_rest_api_alter() {
 add_action( 'rest_api_init', 'wp_rest_api_alter');
 
 function wp_api_add_tax($post, $data, $update){
-    foreach( $data['cat_selfies'] as $tax => $val ){
-        wp_set_object_terms( $post['ID'], $data['cat_selfies'], 'cat_selfies' );
-    }
+  foreach( $data['cat_selfies'] as $tax => $val ){
+    wp_set_object_terms( $post['ID'], $data['cat_selfies'], 'cat_selfies' );
+  }
 }
 add_filter('json_insert_post', 'wp_api_add_tax', 10, 3);
 ?>

@@ -317,8 +317,9 @@ strong {
   }
 }
 
+
+
 .header {
-  display: none;
 
   .name {
     position: fixed;
@@ -510,149 +511,6 @@ strong {
     letter-spacing: .06em;
     z-index: 100;
   }
-
-  .slider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    outline: none;
-
-    .flickity-page-dots {
-      display: none;
-      position: fixed;
-      bottom: 0px;
-      left: 50%;
-      transform: translate3d(-50%, 0%, 0);
-      opacity: 1;
-      transition: transform 660ms cubic-bezier(.165, .84, .44, 1), opacity 660ms cubic-bezier(.165, .84, .44, 1);
-      will-change: transform, opacity;
-
-      &.hide {
-        transform: translate3d(-50%, 100%, 0);
-        opacity: 0;
-      }
-
-      li {
-        display: inline-block;
-        width: 6px;
-        height: 6px;
-        margin: 0px 6px;
-        border-radius: 50%;
-        background: rgba(255,255,255,.2);
-        cursor: pointer;
-
-        &.is-selected {
-          background: rgba(255,255,255,1);
-        }
-      }
-    }
-
-    .flickity-viewport {
-      width: 100%;
-      height: 100%;
-
-      .flickity-slider {
-        width: 100%;
-        height: 100%;
-
-        .project {
-          display: flex;
-          align-items: center;
-          height: 100%;
-          padding: 0 $unit-4;
-          transform-origin: center;
-          perspective: 100px;
-          will-change: transform;
-
-          a {
-            position: relative;
-            transition: transform 660ms cubic-bezier(.165, .84, .44, 1), opacity 660ms cubic-bezier(.165, .84, .44, 1);
-            will-change: transform, opacity;
-
-            canvas {
-              position: absolute;
-              top: 0px;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              z-index: 10;
-            }
-          }
-
-          &.left {
-            a:hover {
-              transform: translate3d(2%, 0, 0);
-            }
-          }
-
-          &.right {
-            a:hover {
-              transform: translate3d(-2%, 0, 0);
-            }
-          }
-
-          figure {
-            box-sizing: content-box;
-            transform: scale(.75);
-            backface-visibility: hidden;
-            opacity: .4;
-            transition: transform 660ms cubic-bezier(.165, .84, .44, 1), opacity 660ms cubic-bezier(.165, .84, .44, 1);
-            will-change: transform, opacity;
-
-            img {
-              width: 36vw;
-              backface-visibility: hidden;
-              opacity: 1;
-              transition: 660ms opacity cubic-bezier(.165, .84, .44, 1), 660ms transform cubic-bezier(.165, .84, .44, 1);
-              will-change: transform, opacity;
-            }
-
-            &:hover {
-              opacity: .4;
-            }
-
-            a {
-              display: block;
-              width: 100%;
-              height: 100%;
-            }
-          }
-
-          &.is-selected {
-
-            figure {
-              transform: scale(1);
-              backface-visibility: hidden;
-              opacity: 1;
-              transition: transform 660ms cubic-bezier(.165, .84, .44, 1), opacity 660ms cubic-bezier(.165, .84, .44, 1);
-              will-change: transform, opacity;
-            }
-          }
-
-          &.is-ready {
-
-            figure {
-
-              &.set-back {
-
-                a {
-                  pointer-events: all;
-
-                  &:hover {
-                    transform: scale(1.02);
-                    opacity: .4;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
 .frames {
@@ -819,25 +677,78 @@ strong {
     }
   }
 
-  .stream {
-    position: relative;
-    margin: 0 20vw;
-    z-index: 10;
+  .flky {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    outline: none;
 
-    figure {
-      width: 100%;
-      padding: $unit-4 0;
+    .flickity-page-dots {
+      position: fixed;
+      bottom: 0px;
+      left: 50vw;
+      transform: translate3d(-50%, 0%, 0);
+      opacity: 1;
+      transition: transform 660ms cubic-bezier(.165, .84, .44, 1), opacity 660ms cubic-bezier(.165, .84, .44, 1);
+      will-change: transform, opacity;
 
-      img, video {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+      &.hide {
+        transform: translate3d(-50%, 100%, 0);
+        opacity: 0;
       }
 
-      iframe {
-        width: 100%;
+      li {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin: 0px 4px;
+        border-radius: 50%;
+        background: $black;
+        cursor: pointer;
+        border: 1px solid $black;
+
+        &.is-selected {
+          background: rgba(255,255,255,0);
+        }
       }
     }
+
+    .flickity-viewport {
+      width: 100%;
+      height: 100%;
+
+      .flickity-slider {
+        width: 100%;
+        height: 100%;
+
+        figure {
+          padding: 6vh 6vw;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+
+        img {
+          object-fit: contain;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .flky-current-slide {
+    position: fixed;
+    bottom: 0px;
+    left: 25vw;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .flky-arrows {
+    position: fixed;
+    bottom: 0px;
+    right: 25vw;
+    transform: translate3d(50%, 0, 0);
   }
 
   .title {
@@ -888,6 +799,7 @@ strong {
     transition: transform 660ms cubic-bezier(.165, .84, .44, 1);
     will-change: transform;
     z-index: 110;
+    font-size: 1.2em;
 
     &.show{
       transform: translate3d(0, 0, 0);
@@ -903,6 +815,7 @@ strong {
     transition: transform 660ms cubic-bezier(.165, .84, .44, 1);
     will-change: transform;
     z-index: 110;
+    font-size: 1.2em;
 
     &.show{
       transform: translate3d(0, 0, 0);
@@ -912,7 +825,7 @@ strong {
   .explore {
     position: fixed;
     bottom: 0px;
-    left: 50%;
+    left: 50vw;
     transform: translate3d(-50%, 100%, 0);
     backface-visibility: hidden;
     transition: transform 660ms cubic-bezier(.165, .84, .44, 1);
@@ -1141,6 +1054,19 @@ strong {
           margin: 0px;
           float: none;
         }
+      }
+    }
+  }
+}
+
+.pagination {
+  a {
+    .hover-text {
+      display: none;
+    }
+    &:hover {
+      .hover-text {
+        display: inline-block;
       }
     }
   }

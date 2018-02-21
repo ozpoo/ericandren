@@ -3,13 +3,13 @@
 	<main role="main">
 
 		<section class="filter">
-			<ul>
+			<!-- <ul>
 				<li><button class="filter-button" data-category="All"><small>All</small></button></li>
-				<!-- <?php $terms = get_terms(['taxonomy' => 'work_category']); ?>
+				<?php $terms = get_terms(['taxonomy' => 'work_category']); ?>
 				<?php foreach($terms as $term): ?>
 					<li><button class="filter-button" data-category="<?php echo $term->name; ?>"><small><?php echo $term->name; ?></small></button></li>
-				<?php endforeach; ?> -->
-			</ul>
+				<?php endforeach; ?>
+			</ul> -->
 		</section>
 
 		<section class="list">
