@@ -22,16 +22,12 @@
 	<body <?php body_class(); ?>>
 
 		<header class="header">
-			<!-- <div class="menu-toggle">
-				<ul>
-					<li>
-						<button><small>Menu</small></button>
-					</li>
-				</ul>
-				<ul>
+			<div class="menu-toggle">
+				<p><button>E<span class="hover-text">ric </span>A<span class="hover-text">ndren</span></button></p>
+				<!-- <ul>
 					<?php foreach ( get_post_types( '', 'names' ) as $post_type ): ?>
 						<li><a href=""><?php echo $post_type; ?></a></li>
 					<?php endforeach; ?>
-				</ul>
-			</div> -->
+				</ul> -->
+			</div>
 		</header>
