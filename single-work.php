@@ -39,7 +39,7 @@
 						alt=""
 						src="<?php echo wp_get_attachment_image_src($image, 'micro')[0]; ?>"
 						sizes="auto"
-						data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'full'); ?>"
+						data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'large'); ?>"
 						class="lazyload blur-up" />
 				</figure>
 				<?php $images = get_field('slideshow'); ?>
@@ -58,7 +58,7 @@
 
 			<section class="flky-current-slide"></section>
 
-			<section class="flky-arrows"><p><button class="flky-previous"></buttom><i class="fas fa-angle-left"></i><button class="flky-next"><i class="fas fa-angle-right"></i></buttom></section>
+			<section class="flky-arrows"><p><button class="flky-previous"></buttom><i class="far fa-arrow-alt-circle-left"></i><button class="flky-next"><i class="far fa-arrow-alt-circle-right"></i></buttom></section>
 
 			<?php
 				if(get_adjacent_post(false, '', true )){
@@ -201,6 +201,12 @@
 								$(".name, .menu-toggle, .top-title, .explore").addClass("show");
 							}
 							scroll();
+
+							if(scrollTop > $(document).height() - ($(window).height()*1.25) ) {
+								$(".flky-current-slide, .flky-arrows, .flickity-page-dots").addClass("show");
+							} else {
+								$(".flky-current-slide, .flky-arrows, .flickity-page-dots").removeClass("show");
+							}
 						}
 
 					}
