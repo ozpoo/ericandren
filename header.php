@@ -15,15 +15,18 @@
 		<?php wp_head(); ?>
 
 		<script>
-				document.createElement( "picture" );
+			document.createElement( "picture" );
 		</script>
 
 	</head>
 	<body <?php body_class(); ?>>
 
 		<header class="header">
+			<div class="name">
+				<p><a href="<?php echo site_url( '/', 'http' ); ?>">E<span class="hover-text">ric </span>A<span class="hover-text">ndren</span></a></p>
+			</div>
 			<div class="menu-toggle">
-				<p><button>E<span class="hover-text">ric </span>A<span class="hover-text">ndren</span></button></p>
+				<p><button>M<span class="hover-text">enu</span></button></p>
 				<!-- <ul>
 					<?php foreach ( get_post_types( '', 'names' ) as $post_type ): ?>
 						<li><a href=""><?php echo $post_type; ?></a></li>

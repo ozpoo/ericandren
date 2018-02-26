@@ -8,7 +8,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssdeclsort = require('css-declaration-sorter');
 const concat = require("gulp-concat");
-const livereload = require('gulp-livereload');
+const stylish = require('jshint-stylish');
 
 var watchJS = true;
 var watchSCSS = true;
@@ -18,11 +18,10 @@ gulp.task('js', function () {
 		watchJS = false;
 		gulp.src('assets/js/src/script.js')
 		.pipe(jshint())
-		.pipe(jshint.reporter('fail'))
-		.pipe(concat('build.js'))
+		.pipe(jshint.reporter(stylish))
+		.pipe(concat('script.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('assets/js/build'))
-		.pipe(livereload());
+		.pipe(gulp.dest('assets/js/build'));
 		watchJS = true;
 	}
 });
@@ -38,16 +37,14 @@ gulp.task('scss', function () {
 		.pipe(gulp.dest('./'))
 		.pipe(sass().on('error', sass.logError))
 	  .pipe(postcss([ autoprefixer() ]))
-	  .pipe(concat('build.css'))
+	  .pipe(concat('style.css'))
 		.pipe(minifyCss())
-	  .pipe(gulp.dest('assets/css/build'))
-		.pipe(livereload());
+	  .pipe(gulp.dest('assets/css/build'));
 		watchSCSS = true;
 	}
 });
 
 gulp.task('watch', function () {
-	livereload.listen();
   gulp.watch(['assets/css/src/style.scss'], ['scss']);
 	gulp.watch(['assets/js/src/script.js'], ['js']);
 });

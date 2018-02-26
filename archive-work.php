@@ -2,6 +2,8 @@
 
 	<main role="main">
 
+		<section class="project-modal"><div class="content"></div></section>
+
 		<section class="filter">
 			<!-- <ul>
 				<li><button class="filter-button" data-category="All"><small>All</small></button></li>
@@ -184,6 +186,19 @@
 											 window.setTimeout(callback, 1000 / 60);
 									 };
 					 })();
+
+					 $(document).on( 'click', '.ajax-project', function ( e ) {
+				    e.preventDefault();
+				    $.ajax( {
+				      url: '/ericandren/wp-json/wp/v2/work?filter[orderby]=rand&filter[posts_per_page]=1',
+				      success: function ( data ) {
+				        var post = data.shift(); // The data is an array of posts. Grab the first one.
+				        $('.project-modal .content').html(post.content.rendered);
+								$('.project-modal').addClass("show");
+				      },
+				      cache: false
+				    } );
+				  } );
 
 				});
 

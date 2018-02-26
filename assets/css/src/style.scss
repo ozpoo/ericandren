@@ -222,7 +222,7 @@ body {
   color: $black;
 	font-family: $font-regular;
 	font-size: 18px;
-  font-size: calc(12px + .2vw + .2vh);
+  font-size: calc(14px + .2vw + .2vh);
   font-weight: 300;
   line-height: 1.4;
   opacity: 0;
@@ -338,13 +338,40 @@ strong {
     }
   }
 
-  .menu-toggle {
+  .name {
     position: fixed;
     top: 0;
     left: 0;
     transform: translate3d(0, -100%, 0);
     backface-visibility: hidden;
-    text-align: right;
+    opacity: 0;
+    transition: transform 880ms cubic-bezier(.165, .84, .44, 1), opacity 660ms cubic-bezier(.165, .84, .44, 1);
+    will-change: opacity, transform;
+    z-index: 110;
+
+    a {
+      .hover-text {
+        display: none;
+      }
+      &:hover {
+        .hover-text {
+          display: inline-block;
+        }
+      }
+    }
+
+    &.show {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  .menu-toggle {
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translate3d(0, -100%, 0);
+    backface-visibility: hidden;
     opacity: 0;
     transition: transform 880ms cubic-bezier(.165, .84, .44, 1), opacity 660ms cubic-bezier(.165, .84, .44, 1);
     will-change: opacity, transform;
@@ -560,6 +587,33 @@ strong {
 .three {
   width: 100vw;
   height: 100vh;
+}
+
+.project-modal {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  backface-visibility: hidden;
+  background: $white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 440ms cubic-bezier(.165, .84, .44, 1);
+  will-change: opacity;
+  z-index: 120;
+
+  &.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .content {
+    margin: 10vh 25vw;
+  }
 }
 
 .menu-modal {

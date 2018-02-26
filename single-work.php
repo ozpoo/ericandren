@@ -48,9 +48,9 @@
 						<img
 							draggable="false"
 							alt=""
-							src="<?php echo wp_get_attachment_image_src($image, 'micro')[0]; ?>"
+							src="<?php echo wp_get_attachment_image_src($image[ID], 'micro')[0]; ?>"
 							sizes="auto"
-							data-srcset="<?php echo wp_get_attachment_image_srcset($image, 'large'); ?>"
+							data-srcset="<?php echo wp_get_attachment_image_srcset($image[ID], 'large'); ?>"
 							class="lazyload blur-up" />
 					</figure>
 				<?php endforeach; ?>
@@ -142,7 +142,7 @@
 							rightToLeft: false,
 							setGallerySize: false,
 							watchCSS: false,
-							wrapAround: true
+							wrapAround: false
 						});
 
 						flky.on( 'select', function( progress ) {

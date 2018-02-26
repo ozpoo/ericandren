@@ -6,7 +6,7 @@
 		<article class="list-item" ]>
 		<?php $categories = wp_get_post_terms($post->ID, 'work_category', array("fields" => "names")); ?>
 			<div class="thumbnail">
-				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?>" data-category="<?php echo $categories[0]; ?>">
+				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?> ajax-project" data-category="<?php echo $categories[0]; ?>">
 					<?php $thumb = get_post_thumbnail_id(); ?>
 					<picture>
 						<?php if($count++ == 1): ?>
