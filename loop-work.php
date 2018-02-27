@@ -3,10 +3,10 @@
 	<?php while (have_posts()) : the_post(); ?>
 		<?php $thumb = get_post_thumbnail_id(); ?>
 
-		<article class="list-item" ]>
+		<article class="list-item">
 		<?php $categories = wp_get_post_terms($post->ID, 'work_category', array("fields" => "names")); ?>
 			<div class="thumbnail">
-				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?> ajax-project" data-category="<?php echo $categories[0]; ?>">
+				<a href="<?php the_permalink(); ?>" class="<?php echo $categories[0]; ?> ajax-project" data-category="<?php echo $categories[0]; ?>" data-id="<?php echo $post->ID; ?>">
 					<?php $thumb = get_post_thumbnail_id(); ?>
 					<picture>
 						<?php if($count++ == 1): ?>
@@ -29,19 +29,19 @@
 			</div>
 			<div class="title"><a href="<?php the_permalink(); ?>" data-category="<?php echo $categories[0]; ?>"><strong><?php the_title(); ?></strong></a></div>
 			<div class="excerpt"><?php the_excerpt(); ?></div>
-			<ul class="cat">
+			<div class="cat">
 			 <?php $posttags = get_the_tags(); ?>
 					<?php if ( ! empty( $categories ) ) { ?>
 						<?php foreach( $categories as $category ) { ?>
-							<li><button class="filter-button" data-category="<?php echo $category; ?>"><small><?php echo $category; ?></small></button></li>
+							<button class="filter-button" data-category="<?php echo $category; ?>"><small><?php echo $category; ?></small></button>
 						<?php } ?>
 					<?php } ?>
 				<!-- <?php if ( ! empty( $posttags ) ) { ?>
 					<?php foreach( $posttags as $tag ) { ?>
-						<li><button class="filter-button" data-category="<?php echo $tag->name; ?>"><small><?php echo $tag->name; ?></small></button></li>
+						<button class="filter-button" data-category="<?php echo $tag->name; ?>"><small><?php echo $tag->name; ?></small></button>
 					<?php } ?>
 				<?php } ?> -->
-			</ul>
+			</div>
 		</article>
 
 	<?php endwhile; ?>

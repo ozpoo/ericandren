@@ -856,7 +856,7 @@ function fb_unautop_4_img( $content ) {
 add_filter( 'the_content', 'fb_unautop_4_img', 99 );
 
 function alx_embed_html( $html ) {
-    return '<figure>' . $html . '</figure>';
+    return '<figure><div class="video-wrap">' . $html . '</div></figure>';
 }
 add_filter( 'embed_oembed_html', 'alx_embed_html', 10, 3 );
 add_filter( 'video_embed_html', 'alx_embed_html' );

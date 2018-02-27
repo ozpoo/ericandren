@@ -2,7 +2,20 @@
 
 	<main role="main">
 
-		<section class="project-modal"><div class="content"></div></section>
+		<section class="project-modal">
+			<div class="info">
+				<div class="title"></div>
+			</div>
+
+			<section class="carousel">
+				<div class="flky"></div>
+				<div class="flky-current-slide show"></div>
+				<div class="flky-arrows show"><p><button class="flky-previous"></buttom><i class="far fa-arrow-alt-circle-left"></i><button class="flky-next"><i class="far fa-arrow-alt-circle-right"></i></buttom></div>
+			</section>
+
+			<div class="content"></div>
+			<div class="close"><p><button>Close</button></p></div>
+		</section>
 
 		<section class="filter">
 			<!-- <ul>
@@ -25,6 +38,7 @@
 
 				$(function () {
 
+					var flky;
 					var transitionSplit, transitionTime, transitionCount, transitionBuffer;
 					var cache = [];
 					var lastX, lastY, offsetLeft, offsetTop;
@@ -189,16 +203,117 @@
 
 					 $(document).on( 'click', '.ajax-project', function ( e ) {
 				    e.preventDefault();
+						var id = $(this).attr("data-id");
 				    $.ajax( {
-				      url: '/ericandren/wp-json/wp/v2/work?filter[orderby]=rand&filter[posts_per_page]=1',
+				      url: '/ericandren/wp-json/wp/v2/work/'+id+'?_embed',
 				      success: function ( data ) {
-				        var post = data.shift(); // The data is an array of posts. Grab the first one.
-				        $('.project-modal .content').html(post.content.rendered);
+				        var post = data;
+				        $('.project-modal .title').append($("<p/>").append(post.title.rendered));
+								var img = $("<img/>");
+								console.log(post._embedded);
+								var src = post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['02']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['02']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['03']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['03']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['04']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['04']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['05']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['05']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['06']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['06']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['07']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['07']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['08']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['08']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['09']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['09']['width'] + "w, ";
+								src += post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['10']['source_url'] + " " + post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['10']['width'] + "w";
+								$(img).attr("src", post._embedded['wp:featuredmedia']['0']['media_details']['sizes']['micro']['source_url']);
+								$(img).attr("draggable", "false");
+								$(img).attr("sizes", "auto");
+								$(img).attr("data-srcset", src);
+								$(img).addClass("lazyload blur-up");
+								$('.project-modal .flky').append($("<figure/>").append(img));
+
+								for(var i in post.acf.slideshow) {
+									var img = $("<img/>");
+									var src = post.acf.slideshow[i]['sizes']['02'] + " " + post.acf.slideshow[i].sizes['02-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['03']+ " " + post.acf.slideshow[i].sizes['03-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['04'] + " " + post.acf.slideshow[i].sizes['04-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['05'] + " " + post.acf.slideshow[i].sizes['05-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['06'] + " " + post.acf.slideshow[i].sizes['06-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['07'] + " " + post.acf.slideshow[i].sizes['07-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['08'] + " " + post.acf.slideshow[i].sizes['08-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['09'] + " " + post.acf.slideshow[i].sizes['09-width'] + "w, ";
+									src += post.acf.slideshow[i]['sizes']['10'] + " " + post.acf.slideshow[i].sizes['10-width'] + "w";
+									$(img).attr("src", post.acf.slideshow[i].sizes.micro);
+									console.log(post.acf.slideshow[i]);
+									$(img).attr("draggable", "false");
+									$(img).attr("sizes", "auto");
+									$(img).attr("data-srcset", src);
+									$(img).addClass("lazyload blur-up");
+									$('.project-modal .flky').append($("<figure/>").append(img));
+								}
+								$('.project-modal .content').append(post.content.rendered);
+								initFlky();
 								$('.project-modal').addClass("show");
 				      },
+
 				      cache: false
-				    } );
-				  } );
+				    });
+				  });
+
+					$(document).on( 'click', '.close button', function () {
+						$('.project-modal').removeClass("show");
+						setTimeout(function(){
+							$('.project-modal .title').html("");
+							$('.project-modal .content').html("");
+							flky.destroy();
+							$('.project-modal .flky').html("");
+						}, 880);
+					});
+
+					function initFlky() {
+						flky = new Flickity( '.flky', {
+							accessibility: true,
+							adaptiveHeight: true,
+							autoPlay: false,
+							cellAlign: 'center',
+							cellSelector: undefined,
+							contain: false,
+							draggable: true,
+							dragThreshold: 3,
+							freeScroll: false,
+							selectedAttraction: 0.1,
+							friction: 1,
+							groupCells: false,
+							initialIndex: 0,
+							lazyLoad: false,
+							percentPosition: true,
+							prevNextButtons: false,
+							pageDots: true,
+							resize: true,
+							rightToLeft: false,
+							setGallerySize: false,
+							watchCSS: false,
+							wrapAround: false
+						});
+
+						flky.on( 'select', function( progress ) {
+							setCurrentDisplay();
+						});
+						setCurrentDisplay();
+
+						$(".flky-next").on("click", function (){
+							flky.next();
+						});
+
+						$(".flky-previous").on("click", function (){
+							flky.previous();
+						});
+					}
+
+					function setCurrentDisplay() {
+						var current = pad(flky.selectedIndex+1 , 2) + " / " + pad(flky.slides.length, 2);
+						$(".flky-current-slide").html("<p>"+current+"</p>");
+					}
+
+					var pad = function(num, size) {
+				    var s = "000000000" + num;
+				    return s.substr(s.length-size);
+					}
 
 				});
 
