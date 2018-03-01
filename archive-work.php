@@ -9,12 +9,21 @@
 
 			<section class="carousel">
 				<div class="flky"></div>
-				<div class="flky-current-slide show"></div>
-				<div class="flky-arrows show"><p><button class="flky-previous"></buttom><i class="far fa-arrow-alt-circle-left"></i><button class="flky-next"><i class="far fa-arrow-alt-circle-right"></i></buttom></div>
+				<!-- <div class="flky-current-slide"></div> -->
+				<!-- <div class="flky-arrows"><p><button class="flky-previous"></buttom><i class="far fa-arrow-alt-circle-left"></i><button class="flky-next"><i class="far fa-arrow-alt-circle-right"></i></buttom></div> -->
 			</section>
 
 			<div class="content"></div>
-			<div class="close"><p><button>Close</button></p></div>
+			<div class="close"><p><button>C<span class="hover-text">lose</span></button></p></div>
+
+			<div class="pagination">
+				<div class="next">
+					<p><a href="<?php echo $prevPost; ?>">P<span class="hover-text">revious</span></i></a></p>
+				</div>
+				<div class="previous">
+					<p><a href="<?php echo $nextPost; ?>">N<span class="hover-text">ext</span></a></p>
+				</div>
+			</div>
 		</section>
 
 		<section class="filter">
@@ -207,6 +216,7 @@
 				    $.ajax( {
 				      url: '/ericandren/wp-json/wp/v2/work/'+id+'?_embed',
 				      success: function ( data ) {
+								$("body").addClass("noScroll");
 				        var post = data;
 				        $('.project-modal .title').append($("<p/>").append(post.title.rendered));
 								var img = $("<img/>");
@@ -249,6 +259,10 @@
 								$('.project-modal .content').append(post.content.rendered);
 								initFlky();
 								$('.project-modal').addClass("show");
+								setTimeout(function(){
+									$(".flky-current-slide, .flky-arrows, .flickity-page-dots").addClass("show");
+									$(".next, .previous").addClass("show");
+								}, 880);
 				      },
 
 				      cache: false
@@ -257,11 +271,11 @@
 
 					$(document).on( 'click', '.close button', function () {
 						$('.project-modal').removeClass("show");
+						$("body").removeClass("noScroll");
 						setTimeout(function(){
 							$('.project-modal .title').html("");
 							$('.project-modal .content').html("");
-							flky.destroy();
-							$('.project-modal .flky').html("");
+							destroyFlky();
 						}, 880);
 					});
 
@@ -303,6 +317,15 @@
 						$(".flky-previous").on("click", function (){
 							flky.previous();
 						});
+					}
+
+					function destroyFlky() {
+						flky.destroy();
+						$(".flky-next").off("click");
+						$(".flky-previous").off("click");
+						$(".flky-current-slide, .flky-arrows, .flickity-page-dots").removeClass("show");
+						$(".next, .previous").removeClass("show");
+						$('.project-modal .flky').html("");
 					}
 
 					function setCurrentDisplay() {

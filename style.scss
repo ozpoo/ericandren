@@ -221,8 +221,8 @@ body {
   background: white;
   color: $black;
 	font-family: $font-regular;
-	font-size: 18px;
-  font-size: calc(14px + .2vw + .2vh);
+	font-size: 12px;
+  font-size: calc(14px + .3vw);
   font-weight: 300;
   line-height: 1.4;
   opacity: 0;
@@ -231,6 +231,10 @@ body {
 
   &.show {
     opacity: 1;
+  }
+
+  &.noScroll {
+    overflow: hidden;
   }
 }
 
@@ -591,6 +595,7 @@ strong {
 }
 
 .project-modal {
+  -webkit-overflow-scrolling: touch;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -618,6 +623,16 @@ strong {
     position: fixed;
     top: 0px;
     right: 0px;
+
+    .hover-text {
+      display: none;
+    }
+
+    &:hover {
+      .hover-text {
+        display: inline-block;
+      }
+    }
   }
 
   .info {
@@ -640,6 +655,58 @@ strong {
   	height: 100%;
   }
 
+  .next {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    transform: translate3d(-100%, 0, 0);
+    backface-visibility: hidden;
+    font-size: 1.2em;
+    transition: transform 660ms cubic-bezier(.165, .84, .44, 1);
+    will-change: transform;
+    z-index: 110;
+
+    &.show{
+      transform: translate3d(0, 0, 0);
+    }
+
+    .hover-text {
+      display: none;
+    }
+
+    &:hover {
+      .hover-text {
+        display: inline-block;
+      }
+    }
+  }
+
+  .previous {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    transform: translate3d(100%, 0, 0);
+    backface-visibility: hidden;
+    font-size: 1.2em;
+    transition: transform 660ms cubic-bezier(.165, .84, .44, 1);
+    will-change: transform;
+    z-index: 110;
+
+    &.show{
+      transform: translate3d(0, 0, 0);
+    }
+
+    .hover-text {
+      display: none;
+    }
+
+    &:hover {
+      .hover-text {
+        display: inline-block;
+      }
+    }
+  }
+
   .carousel {
     position: relative;
 
@@ -650,7 +717,7 @@ strong {
       outline: none;
 
       .flickity-page-dots {
-        position: fixed;
+        position: absolute;
         bottom: 0px;
         left: 50vw;
         transform: translate3d(-50%, 100%, 0);
@@ -1116,8 +1183,7 @@ strong {
 .list {
   display: flex;
   flex-wrap: wrap;
-  padding: 4vh 4vw;
-  padding-right: 4vw;
+  padding: 4vh 8vw;
   font-size: .9em;
 
   .list-item {
